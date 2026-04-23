@@ -14,9 +14,16 @@
         nav a:hover { color: var(--primary); }
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         h1 { font-family: 'Kanit', sans-serif; color: var(--primary); }
-        .achievement-card { background: white; border-left: 8px solid #ffc107; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .achievement-card h2 { margin-top: 0; color: #343a40; }
-        .achievement-card .badge { background: #fff3cd; color: #856404; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
+        
+        .achievement-grid { display: flex; flex-direction: column; gap: 25px; }
+        .achievement-card { background: white; border-left: 8px solid #ffc107; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: 0.3s; }
+        .achievement-card:hover { transform: scale(1.01); }
+        .badge { display: inline-block; background: #fff3cd; color: #856404; padding: 6px 18px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; margin-bottom: 15px; }
+        .achievement-card h2 { margin: 0 0 10px 0; color: #1a202c; font-family: 'Kanit', sans-serif; }
+        .role-text { color: #5f6368; font-weight: 500; margin-bottom: 15px; display: block; }
+        .desc-text { color: #4a5568; line-height: 1.7; }
+        
+        .loading { text-align: center; font-size: 1.2rem; color: #5f6368; margin: 50px 0; }
         footer { text-align: center; padding: 40px 0; background: #eee; margin-top: 60px; }
     </style>
 </head>
@@ -24,7 +31,7 @@
 
     <nav>
         <div class="container">
-            <div style="font-weight: bold; font-family: 'Kanit'; color: var(--primary);">KRU DUKE</div>
+            <div style="font-weight: bold; font-family: 'Kanit'; color: var(--primary); font-size: 1.2rem;">KRU DUKE</div>
             <div>
                 <a href="index.html">หน้าแรก</a>
                 <a href="achievements.html" style="color: var(--primary);">ผลงาน</a>
@@ -35,28 +42,75 @@
 
     <div class="container">
         <h1>ผลงานที่ภาคภูมิใจและการแข่งขัน</h1>
-        <p>รวบรวมเกียรติประวัติและการฝึกสอนนักเรียนในการแข่งขันระดับต่างๆ</p>
+        <p>บันทึกเกียรติประวัติและความสำเร็จที่อัปเดตข้อมูลจาก Google Sheets</p>
 
-        <div class="achievement-card">
-            <span class="badge">รางวัลรองชนะเลิศ</span>
-            <h2>การแข่งขัน CPF CONNEXT-ED CODING CHALLENGE 2026</h2>
-            <p><strong>รายการ:</strong> หุ่นยนต์เดินตามเส้น (ภารกิจสงครามส่งไข่)</p>
-            <p><strong>บทบาท:</strong> ครูผู้ฝึกสอนนักเรียน</p>
-            <hr>
-            <p>มุ่งเน้นการฝึกทักษะการเขียนโปรแกรมควบคุมหุ่นยนต์และการแก้ปัญหาเฉพาะหน้า (Computational Thinking) ให้แก่นักเรียนจนสามารถคว้ารางวัลในระดับโครงการได้สำเร็จ</p>
-        </div>
-
-        <!-- ครูดุ๊กสามารถเพิ่มผลงานอื่นๆ ในอนาคตได้ที่นี่ -->
-        <div class="achievement-card" style="border-left-color: var(--primary);">
-            <span class="badge" style="background: var(--accent); color: var(--primary);">งานประจำ</span>
-            <h2>ครูประสานงานมูลนิธิสานอนาคตการศึกษา (CONNEXT ED)</h2>
-            <p>ดูแลและขับเคลื่อนโครงการด้านการศึกษาและการเข้าถึงเทคโนโลยีของนักเรียนโรงเรียนดอนท้าววิทยา</p>
-        </div>
+        <div id="loading" class="loading">🏆 กำลังดึงข้อมูลผลงาน...</div>
+        <div id="achievement-container" class="achievement-grid"></div>
     </div>
 
     <footer>
         <p>&copy; 2024 ว่าที่ร้อยตรียืนยง แก้วระวัง | โรงเรียนดอนท้าววิทยา</p>
     </footer>
+
+    <script>
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7mCPEdnMQi52R-pMWAzDA4foc3IaiNiiS4LwtujmjHF9YNr5w9G0-3G3iZylrwFlBliPYsYj6O1DO/pub?gid=1360374301&single=true&output=csv';
+
+        function csvToArray(strData) {
+            const objPattern = new RegExp(("(\\,|\\r?\\n|\\r|^)" + "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" + "([^\\,\\r?\\n]*))"), "gi");
+            let arrData = [[]];
+            let arrMatches = null;
+            while (arrMatches = objPattern.exec(strData)) {
+                let strMatchedDelimiter = arrMatches[1];
+                if (strMatchedDelimiter.length && (strMatchedDelimiter != ",")) {
+                    arrData.push([]);
+                }
+                let strMatchedValue;
+                if (arrMatches[2]) {
+                    strMatchedValue = arrMatches[2].replace(new RegExp("\"\"", "g"), "\"");
+                } else {
+                    strMatchedValue = arrMatches[3];
+                }
+                arrData[arrData.length - 1].push(strMatchedValue);
+            }
+            return arrData;
+        }
+
+        async function fetchAchievements() {
+            try {
+                const response = await fetch(csvUrl);
+                const text = await response.text();
+                const rows = csvToArray(text);
+                
+                const container = document.getElementById('achievement-container');
+                document.getElementById('loading').style.display = 'none';
+
+                for (let i = 1; i < rows.length; i++) {
+                    const columns = rows[i];
+                    if (columns.length >= 3 && columns[0]) {
+                        const title = columns[0].trim();
+                        const award = columns[1].trim();
+                        const role = columns[2].trim();
+                        const desc = columns[3] ? columns[3].trim() : "";
+
+                        const card = `
+                            <div class="achievement-card">
+                                <span class="badge">${award}</span>
+                                <h2>${title}</h2>
+                                <span class="role-text">บทบาท: ${role}</span>
+                                <div class="desc-text">${desc}</div>
+                            </div>
+                        `;
+                        container.innerHTML += card;
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').innerText = '⚠️ ไม่สามารถดึงข้อมูลผลงานได้';
+            }
+        }
+
+        fetchAchievements();
+    </script>
 
 </body>
 </html>
