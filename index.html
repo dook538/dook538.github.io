@@ -3,67 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เว็บเพจแรกของฉัน</title>
+    <title>ครูดุ๊ก Portfolio | ว่าที่ร้อยตรียืนยง แก้วระวัง</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Kanit:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS: ส่วนของการตกแต่ง */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        :root {
+            --primary: #1a73e8;
+            --secondary: #5f6368;
+            --accent: #e8f0fe;
+            --dark: #202124;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            background-color: #f0f2f5;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            background-color: white;
-            padding: 2rem;
+            background: white;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Skills Tag */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Teaching Info */
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-list li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        footer {
             text-align: center;
+            padding: 40px 0;
+            background: #eee;
+            margin-top: 40px;
         }
 
-        h1 {
-            color: #1a73e8;
-        }
-
-        button {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #1557b0;
+        @media (max-width: 600px) {
+            .hero-text h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1 id="greeting">ยินดีต้อนรับสู่เว็บแรกของฉัน!</h1>
-        <p>นี่คือผลงานชิ้นแรกที่สร้างโดยใช้ Gemini CLI</p>
-        <button onclick="changeMessage()">ลองกดปุ่มนี้ดูสิ</button>
-    </div>
+    <nav style="background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: bold; font-family: 'Kanit'; color: #1a73e8;">KRU DUKE</div>
+            <div>
+                <a href="index.html" style="text-decoration: none; color: #1a73e8; font-weight: 500; margin-left: 20px; font-family: 'Kanit';">หน้าแรก</a>
+                <a href="achievements.html" style="text-decoration: none; color: #202124; font-weight: 500; margin-left: 20px; font-family: 'Kanit';">ผลงาน</a>
+                <a href="resources.html" style="text-decoration: none; color: #202124; font-weight: 500; margin-left: 20px; font-family: 'Kanit';">คลังบทเรียน</a>
+            </div>
+        </div>
+    </nav>
 
-    <script>
-        /* JavaScript: ส่วนของสมอง/การโต้ตอบ */
-        function changeMessage() {
-            // ดึง "ตัวแปร" ที่อ้างอิงถึงหัวข้อที่มี id ว่า greeting
-            const greetingElement = document.getElementById('greeting');
-            
-            // เปลี่ยนข้อความข้างใน
-            greetingElement.innerText = "เย้! คุณเขียนโปรแกรมสั่งงานผมสำเร็จแล้ว!";
-            greetingElement.style.color = "#28a745"; // เปลี่ยนเป็นสีเขียวด้วย
-        }
-    </script>
+    <header>
+        <div class="container">
+            <img src="profile.jpg" alt="ครูดุ๊ก" class="profile-img">
+            <div class="hero-text">
+                <h1>ว่าที่ร้อยตรียืนยง แก้วระวัง</h1>
+                <p>ครู วิทยฐานะครูชำนาญการ | โรงเรียนดอนท้าววิทยา</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h2 class="section-title">ข้อมูลส่วนตัว</h2>
+                <p style="text-align: center; margin-bottom: 20px;">
+                    ข้าราชการครูสายงานการสอน สาขาคอมพิวเตอร์ศึกษา อายุราชการ 10 ปี 
+                    มีความมุ่งมั่นในการพัฒนานวัตกรรมการจัดการเรียนรู้ที่เน้นผู้เรียนเป็นสำคัญ 
+                    และนำเทคโนโลยีสารสนเทศมาประยุกต์ใช้เพื่อเพิ่มประสิทธิภาพการศึกษา
+                </p>
+                <div class="skill-tags" style="justify-content: center;">
+                    <span class="tag">คอมพิวเตอร์ศึกษา</span>
+                    <span class="tag">ครูชำนาญการ</span>
+                    <span class="tag">เทคโนโลยี ICT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaching" style="background: #f1f3f4;">
+        <div class="container">
+            <h2 class="section-title">การปฏิบัติหน้าที่และการสอน</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>งานจัดการเรียนรู้</h3>
+                    <ul class="info-list">
+                        <li>ภาระงานสอน 22 คาบ/สัปดาห์</li>
+                        <li>สอนวิชาวิทยาศาสตร์และเทคโนโลยี</li>
+                        <li>เน้นการสอนแบบกลุ่มคละความสามารถ</li>
+                        <li>ใช้สื่อ Google Site & Google Form</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>งานพิเศษและโครงการ</h3>
+                    <ul class="info-list">
+                        <li>งานเทคโนโลยีสารสนเทศ (ICT) โรงเรียน</li>
+                        <li>ครูประสานงานมูลนิธิสานอนาคตการศึกษา</li>
+                        <li>ขับเคลื่อนโครงการ CONNEXT ED</li>
+                        <li>ดูแลโครงการสุขาดีมีความสุข</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">ทักษะด้านเทคโนโลยีการศึกษา (EdTech)</h2>
+            <div class="grid">
+                <div class="card" style="text-align: center;">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-tags" style="justify-content: center;">
+                        <span class="tag">Google Site</span>
+                        <span class="tag">Kahoot</span>
+                        <span class="tag">Padlet</span>
+                        <span class="tag">Code.org</span>
+                        <span class="tag">Wheelofnames</span>
+                        <span class="tag">Python (Basics)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ว่าที่ร้อยตรียืนยง แก้วระวัง | โรงเรียนดอนท้าววิทยา</p>
+        <p>สร้างสรรค์โดย เจม (Gemini CLI)</p>
+    </footer>
 
 </body>
 </html>
