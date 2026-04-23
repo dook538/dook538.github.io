@@ -1,0 +1,26 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- ท้องฟ้า -->
+  <rect width="400" height="300" fill="#87CEEB" />
+  
+  <!-- สนามหญ้า -->
+  <rect y="200" width="400" height="100" fill="#2E8B57" />
+  
+  <!-- ตัวบ้าน (สี่เหลี่ยม) -->
+  <rect x="100" y="130" width="150" height="100" fill="#F4A460" stroke="#8B4513" stroke-width="2" />
+  
+  <!-- หลังคา (สามเหลี่ยม) -->
+  <polygon points="100,130 250,130 175,70" fill="#A52A2A" stroke="#8B4513" stroke-width="2" />
+  
+  <!-- ประตู -->
+  <rect x="155" y="175" width="40" height="55" fill="#8B4513" />
+  
+  <!-- หน้าต่าง -->
+  <rect x="120" y="150" width="30" height="30" fill="#FFFFFF" stroke="#8B4513" />
+  <rect x="200" y="150" width="30" height="30" fill="#FFFFFF" stroke="#8B4513" />
+  
+  <!-- พระอาทิตย์ -->
+  <circle cx="340" cy="60" r="30" fill="#FFD700" stroke="#FFA500" stroke-width="2" />
+  
+  <!-- ข้อความ -->
+  <text x="10" y="280" font-family="Arial" font-size="20" fill="white">ครูดุ๊ก's Happy House</text>
+</svg>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เว็บเพจแรกของฉัน</title>
+    <style>
+        /* CSS: ส่วนของการตกแต่ง */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #1a73e8;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1 id="greeting">ยินดีต้อนรับสู่เว็บแรกของฉัน!</h1>
+        <p>นี่คือผลงานชิ้นแรกที่สร้างโดยใช้ Gemini CLI</p>
+        <button onclick="changeMessage()">ลองกดปุ่มนี้ดูสิ</button>
+    </div>
+
+    <script>
+        /* JavaScript: ส่วนของสมอง/การโต้ตอบ */
+        function changeMessage() {
+            // ดึง "ตัวแปร" ที่อ้างอิงถึงหัวข้อที่มี id ว่า greeting
+            const greetingElement = document.getElementById('greeting');
+            
+            // เปลี่ยนข้อความข้างใน
+            greetingElement.innerText = "เย้! คุณเขียนโปรแกรมสั่งงานผมสำเร็จแล้ว!";
+            greetingElement.style.color = "#28a745"; // เปลี่ยนเป็นสีเขียวด้วย
+        }
+    </script>
+
+</body>
+</html>
